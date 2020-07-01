@@ -7,7 +7,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN conda install --quiet --yes bokeh pyviz_comms panel
-RUN pip install git+git://github.com/pyvista/pyvista@master matplotlib pyct
+RUN pip install git+git://github.com/pyvista/pyvista@master matplotlib pyct dask h5py
 
 COPY start_xvfb.sh /sbin/start_xvfb.sh
 RUN chmod a+x /sbin/start_xvfb.sh
@@ -15,5 +15,5 @@ RUN chmod a+x /sbin/start_xvfb.sh
 ENTRYPOINT ["tini", "-g", "--", "start_xvfb.sh"]
 CMD ["start-notebook.sh"]
 
-# Switch back to jovyan to avoid accidental container runs as root
+# Switch back to eekcert to avoid accidental container runs as root
 USER $NB_UID
